@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import CourseCard from "@/components/course-card"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { categories, topics, type courses, getTopicsByCategoryId, getCoursesByTopicId } from "@/lib/data"
 
 export default function Home() {
@@ -51,17 +52,20 @@ export default function Home() {
   const activeCategoryName = categories.find((cat) => cat.id === activeCategory)?.name || ""
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-background dark:bg-gray-900 transition-colors">
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">All the skills you need in one place</h1>
-          <p className="text-lg text-gray-600">
-            From critical skills to technical topics, we support your professional development.
-          </p>
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-4xl font-bold text-foreground mb-2">All the skills you need in one place</h1>
+            <p className="text-lg text-muted-foreground">
+              From critical skills to technical topics, we support your professional development.
+            </p>
+          </div>
+          <ThemeToggle />
         </div>
 
         {/* Category Navigation */}
-        <div className="border-b mb-8">
+        <div className="border-b border-border mb-8">
           <nav className="flex overflow-x-auto pb-1 hide-scrollbar">
             {categories.map((category) => (
               <button
@@ -69,8 +73,8 @@ export default function Home() {
                 onClick={() => handleCategoryChange(category.id)}
                 className={`whitespace-nowrap px-4 py-3 font-medium text-sm ${
                   category.id === activeCategory
-                    ? "text-gray-900 border-b-2 border-gray-900"
-                    : "text-gray-600 hover:text-gray-900"
+                    ? "text-foreground border-b-2 border-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {category.name}
@@ -87,8 +91,8 @@ export default function Home() {
               onClick={() => handleTopicChange(topic.id)}
               className={`rounded-full px-6 py-3 text-sm ${
                 topic.id === activeTopic
-                  ? "bg-gray-800 text-white"
-                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
               }`}
             >
               {topic.name}
@@ -105,7 +109,7 @@ export default function Home() {
 
         {/* Show All Button */}
         <div className="flex justify-center mt-8">
-          <Button variant="outline" className="border-purple-700 text-purple-700 hover:bg-purple-50">
+          <Button variant="outline" className="border-purple-700 text-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20">
             Show all {activeTopicName} courses
           </Button>
         </div>

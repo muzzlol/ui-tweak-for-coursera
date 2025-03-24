@@ -30,36 +30,38 @@ export default function CourseCard({ course }: CourseProps) {
         </div>
         <CardContent className="p-4">
           <h3 className="font-bold text-base line-clamp-2 mb-1">{course.title}</h3>
-          <p className="text-sm text-gray-600 mb-1 line-clamp-1">{course.instructor}</p>
+          <p className="text-sm text-muted-foreground mb-1 line-clamp-1">{course.instructor}</p>
 
           <div className="flex items-center gap-1 mb-1">
-            <span className="font-bold text-amber-800">{course.rating}</span>
+            <span className="font-bold text-amber-800 dark:text-amber-400">{course.rating}</span>
             <div className="flex">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
                   className={`w-4 h-4 ${
-                    i < Math.floor(course.rating) ? "fill-amber-400 text-amber-400" : "fill-gray-200 text-gray-200"
+                    i < Math.floor(course.rating) 
+                      ? "fill-amber-400 text-amber-400" 
+                      : "fill-gray-200 text-gray-200 dark:fill-gray-600 dark:text-gray-600"
                   }`}
                 />
               ))}
             </div>
-            <span className="text-xs text-gray-600">({course.reviews.toLocaleString()})</span>
+            <span className="text-xs text-muted-foreground">({course.reviews.toLocaleString()})</span>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="font-bold">{course.price}</span>
-            <span className="text-gray-500 line-through text-sm">{course.originalPrice}</span>
+            <span className="text-muted-foreground line-through text-sm">{course.originalPrice}</span>
           </div>
 
           <div className="flex gap-2 mt-2">
             {course.premium && (
-              <Badge variant="outline" className="bg-purple-100 text-purple-800 border-purple-200 text-xs font-normal">
+              <Badge variant="outline" className="bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900/20 dark:text-purple-300 dark:border-purple-800/30 text-xs font-normal">
                 Premium
               </Badge>
             )}
             {course.bestseller && (
-              <Badge variant="outline" className="bg-teal-100 text-teal-800 border-teal-200 text-xs font-normal">
+              <Badge variant="outline" className="bg-teal-100 text-teal-800 border-teal-200 dark:bg-teal-900/20 dark:text-teal-300 dark:border-teal-800/30 text-xs font-normal">
                 Bestseller
               </Badge>
             )}
